@@ -1,0 +1,7 @@
+SELECT students.N_z, 
+       students.Name,
+       students.Surname,
+       students.D_BIRTH,
+       hobbies.name
+FROM students, student_hobbies, hobbies
+Where students.N_z=student_hobbies.N_z and student_hobbies.Hobby_id=hobbies.Id;
