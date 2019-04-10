@@ -1,0 +1,21 @@
+Select *
+from
+(SELECT s.N_z, 
+       s.Surname,
+       s.D_BIRTH,
+       ss.name,
+case
+              When st.date_finish is null then sysdate-st.date_start
+              else st.date_finish - st.date_start
+              end days
+FROM students s, student_hobbies st, hobbies ss
+Where s.N_z=st.N_z and st.Hobby_id=ss.Id)
+where days = (
+
+select max(case
+              When st.date_finish is null then sysdate-st.date_start
+              else st.date_finish - st.date_start
+              end) days
+from student_hobbies st
+
+)
