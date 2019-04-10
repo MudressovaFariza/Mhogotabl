@@ -1,0 +1,8 @@
+SELECT s.N_z, 
+       s.Surname,
+       s.D_BIRTH,
+       s.score,
+       aa.sum_risk
+FROM students s,  (select SUM(risk) as sum_risk, st.N_z from student_hobbies st, hobbies ss Where st.Hobby_id=ss.Id and st.date_finish is null
+group by st.N_z) aa
+Where score > (Select AVG(score) from students ) and aa.N_z=s.N_z and aa.sum_risk>0.9
